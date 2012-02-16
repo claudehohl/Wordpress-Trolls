@@ -24,13 +24,13 @@ function parse_troll($str)
 	$text = str_replace('<br />', "\r\n", $text);
 	$text = trim($text);
 	$text = str_replace("\r\n", '<br />', $text);
+	$img = get_img($troll);
 
 	//
 	$r = '';
 	$r.= '<div style="overflow: hidden;">';
-	$r.= '<div style="float: left; padding-right: 15px;">';
-	$img = get_img($troll);
-	$r.= '<img src="' . $img[0] . '" ' . $img[1] . ' alt="' . $troll . '"></img>';
+	$r.= '<div style="float: left; padding-right: 15px; width: ' . $img[1] . 'px;">';
+	$r.= '<img src="' . $img[0] . '" width="' . $img[1] . '" height="' . $img[2] . '" alt="' . $troll . '"></img>';
 	$r.= '</div>';
 	$r.= '<div style="overflow: hidden;">';
 	
@@ -373,7 +373,8 @@ function get_img($troll)
 
 	//get image size
 	$size = getimagesize($plugin_path . $rages[$troll]);
-	$size = $size[3];
+	$width = $size[0];
+	$height = $size[1];
 
 	//image url
 	$image_url = $plugin_url . str_replace(' ', '%20', $rages[$troll]);
@@ -381,6 +382,7 @@ function get_img($troll)
 	//
 	return array(
 		$image_url,
-		$size
+		$width,
+		$height,
 	);
 }

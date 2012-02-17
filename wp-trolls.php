@@ -3,7 +3,7 @@
 Plugin Name: Wordpress Trolls
 Plugin URI: http://scratchbook.ch/2012/02/16/wordpress-trolls/
 Description: Display trollfaces in your posts
-Version: 0.2
+Version: 0.3
 Author: Claude Hohl
 Author URI: http://scratchbook.ch
 License: GPL

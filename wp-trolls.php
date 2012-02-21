@@ -12,6 +12,8 @@ add_filter('the_content', 'make_trolls');
 
 function make_trolls($content) 
 {
+	$content = str_replace('<p>[troll', '[troll', $content);
+	$content = str_replace('[troll]</p>', '[troll]', $content);
 	$content = preg_replace_callback('/\[troll\|(.*?)(\|.*?)?\](.*?)\[troll\]/s', 'parse_troll', $content);
 	return $content;
 }
@@ -28,7 +30,7 @@ function parse_troll($str)
 
 	//
 	$r = '';
-	$r.= '<div style="overflow: hidden;">';
+	$r.= '<div style="overflow: hidden; padding-bottom: 1em;">';
 	$r.= '<div style="float: left; padding-right: 15px; width: ' . $img[1] . 'px;">';
 	$r.= '<img src="' . $img[0] . '" width="' . $img[1] . '" height="' . $img[2] . '" alt="' . $troll . '"></img>';
 	$r.= '</div>';
@@ -36,13 +38,13 @@ function parse_troll($str)
 	
 	if ($quote) 
 	{
-		$r.= '<blockquote>';
+		$r.= '<blockquote><p>';
 	}
 	$r.= $text;
 	
 	if ($quote) 
 	{
-		$r.= '</blockquote>';
+		$r.= '</p></blockquote>';
 	}
 	$r.= '</div>';
 	$r.= '</div>';
